@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class HomeController {
+	
 	@RequestMapping(value="/vistausuario", method=RequestMethod.GET)
 	//@GetMapping(value="vistausuario")	// De esta forma se da por hecho que es un GET
 	public String metodo(Model model) {
@@ -14,4 +15,10 @@ public class HomeController {
 		model.addAttribute("mensaje", cadenadetexto);	// Grabamos mensaje con el contenido de cadenadetexto
 		return "vista";
 	}
+	
+	@RequestMapping(value="/formulario", method=RequestMethod.GET)
+	public String formulario(Model model) {
+		return "formulario";
+	}
+	
 }
