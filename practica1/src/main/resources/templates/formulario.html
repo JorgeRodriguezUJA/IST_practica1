@@ -11,12 +11,18 @@
 	<h1>Registro</h1>
 	<p>Por favor, introduzca sus datos:</p><br>
 	<form action=datosusuario"" method=post"">
-		Nombre de usuario: <br><input type="text" name="usuario" required><br>
+		Nombre de usuario: <br><input type="text" name="user" required><br>
 		Email: <br><input type="email" name="email" required><br>
-		Nombre: <br><input type="text" name="nombre" required><br>
-		Apellidos: <br><input type="text" name="apellidos" required><br>
+		Nombre completo: <br><input type="text" name="nombre" required><br>
+		Contraseña: <br><input type="password" name="password" required><br>
 		<input type="submit" value="Enviar">
 	</form>
+
+
+<!--<span th:text="${param.user}"></span>
+<span th:text="${param.email}"></span>
+<span th:text="${param.nombre}"></span>
+<span th:text="${param.password}"></span>-->
 
 
 </body>
