@@ -13,19 +13,42 @@ import jakarta.servlet.http.HttpSession;
 @Controller
 public class HomeController {
 	
-	@GetMapping(value="/vistausuario")	// De esta forma se da por hecho que es un GET
+	/*@GetMapping(value="/vistausuario")	// De esta forma se da por hecho que es un GET
 	public String metodo(Model model) {
 		String cadenadetexto="Esto es un mensaje del controlador. Prueba segundo commit";
 		model.addAttribute("mensaje", cadenadetexto);	// Grabamos mensaje con el contenido de cadenadetexto
 		return "vista";
-	}
-	
-	/*@GetMapping(value="/datosusuario")
-	public String formulario() {
-		return "formulario";
 	}*/
 	
+	@GetMapping(value="/datosusuario")
+	public String formulario() {
+		return "formulario";
+	}
+	
 	@PostMapping(value="/datosusuario")
+	public String metodo(HttpServletRequest request, Model model) {
+		String user = request.getParameter("user");
+		String email = request.getParameter("email");
+		String nombre = request.getParameter("nombre");
+		String password = request.getParameter("password");
+		
+		Usuario usuario = new Usuario(user, email, nombre, password);
+		model.addAttribute("usuario", usuario);
+		
+		HttpSession session = request.getSession(true);
+		session.setAttribute("usuarioses", usuario);
+		model.addAttribute("usuarioses", usuario);
+		
+		return "vistausuario";
+		
+	}
+	
+	@GetMapping(value="/usuariosesion")
+	public String usuariosesion() {
+		return "usuariosesion";
+	}
+	
+	/*@PostMapping(value="/datosusuario")
 	public String metodo(HttpServletRequest request, HttpServletResponse response, Model model) {
 		String user = request.getParameter("user");
 		String email = request.getParameter("email");
@@ -49,40 +72,8 @@ public class HomeController {
 		
 		System.out.println(usuario + ", " + email + ", " + nombre + ", " + password);
 		return "formulario";
-	}
+	}*/
 	
-	@GetMapping(value="/usuario")
-	public String chequeaUsuario(HttpServletRequest request, HttpServletResponse response) {
-		
-		/*HttpSession session = request.getSession( );
-		Usuario usuario = (Usuario) session.getAttribute (“usuario”);
-		String vista = "";
-		
-		if (usuario == null){
-			Cookie[ ] cookies = request.getCookies( );
-			String emailCookie = "";
-			
-			if (cookies != null){
-				for (Cookie cookie: cookies){
-					if (cookie.getName().equals(emailCookie)) emailCookie = cookie.getValue();
-				}
-			}
-			
-			if (userIdCookie.equals("")){
-				vista = “formulario”;
-				}
-				else{
-					UsuarioBD basededatos = new UsuarioBD( );
-					usuario = basededatos.leeUsuario(emailCookie);
-					session.setAttribute(“usuario”, usuario);
-					vista = “usuario”;
-				}
-		}
-		else { vista = “usuario”};
-		return vista;*/
-		
-		return "";
-		
-	}
+	
 	
 }
