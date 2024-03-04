@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -41,16 +42,17 @@ public class HomeController {
 		
 		Cookie c = new Cookie("emailcookie", email);
 		c.setMaxAge(60*60*24*365*2);
-		c.setPath("/usuariosesion");
+		c.setPath("/vistausuario");
 		response.addCookie(c);
 		
 		Cookie[] cookies = request.getCookies();
-		String emailCookie ="emailCookie";
+		String cookieName ="emailCookie";
 		String cookieValue = "";
 		if (cookies!=null){
 			for (Cookie cookie: cookies){
-				if (emailCookie.equals(cookie.getName())) cookieValue = cookie.getValue();
+				if (cookieName.equals(cookie.getName())) cookieValue = cookie.getValue();
 			}
+			model.addAttribute("valorCookie", c);
 		}
 		
 		
@@ -68,6 +70,17 @@ public class HomeController {
 		model.addAttribute("usuarioses", usuario);
 		
 		return "usuariosesion";
+	}
+	
+	@Autowired
+	DAOInterface dao;
+	
+	@GetMapping(value="/version")
+	public String metodo(Model model) {
+		
+		//dao = new DAOTest();
+		model.addAttribute("texto", dao .version());
+		return "vista";
 	}
 	
 }
