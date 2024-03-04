@@ -25,8 +25,8 @@ public class HomeController {
 		return "formulario";
 	}
 	
-	@PostMapping(value="/datosusuario")
-	public String metodo(HttpServletRequest request, Model model) {
+	@PostMapping(value="/datosusuario")	// Formulario de registro de usuario
+	public String metodo(HttpServletRequest request, Model model, HttpServletResponse response) {
 		String user = request.getParameter("user");
 		String email = request.getParameter("email");
 		String nombre = request.getParameter("nombre");
@@ -39,41 +39,35 @@ public class HomeController {
 		session.setAttribute("usuarioses", usuario);
 		model.addAttribute("usuarioses", usuario);
 		
+		Cookie c = new Cookie("emailcookie", email);
+		c.setMaxAge(60*60*24*365*2);
+		c.setPath("/usuariosesion");
+		response.addCookie(c);
+		
+		Cookie[] cookies = request.getCookies();
+		String emailCookie ="emailCookie";
+		String cookieValue = "";
+		if (cookies!=null){
+			for (Cookie cookie: cookies){
+				if (emailCookie.equals(cookie.getName())) cookieValue = cookie.getValue();
+			}
+		}
+		
+		
+		
 		return "vistausuario";
 		
 	}
 	
-	@GetMapping(value="/usuariosesion")
-	public String usuariosesion() {
+	@GetMapping(value="/usuariosesion")	// Muestra los datos del usuario en la sesión actual
+	public String usuariosesion(HttpServletRequest request, Model model) {
+		
+		HttpSession session = request.getSession(true);
+		Usuario usuario = (Usuario)session.getAttribute("usuarioses");
+		session.setAttribute("usuarioses", usuario);
+		model.addAttribute("usuarioses", usuario);
+		
 		return "usuariosesion";
 	}
-	
-	/*@PostMapping(value="/datosusuario")
-	public String metodo(HttpServletRequest request, HttpServletResponse response, Model model) {
-		String user = request.getParameter("user");
-		String email = request.getParameter("email");
-		String nombre = request.getParameter("nombre");
-		String password = request.getParameter("password");
-		
-		Usuario usuario = new Usuario(user, email, nombre, password);
-		
-		//UsuarioDB basededatos = new UsuarioDB();
-		//String email = basededatos.add(usuario);
-		
-		model.addAttribute("usuario", usuario);
-		
-		HttpSession session = request.getSession();
-		session.setAttribute("usuario", usuario);
-		
-		Cookie c = new Cookie("emailCookie", email);
-		c.setMaxAge(60*60*24*365*3);	// Cookie permanente de 3 años
-		c.setPath("/");
-		response.addCookie(c);
-		
-		System.out.println(usuario + ", " + email + ", " + nombre + ", " + password);
-		return "formulario";
-	}*/
-	
-	
 	
 }
