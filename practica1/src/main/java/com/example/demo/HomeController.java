@@ -10,16 +10,10 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.util.ArrayList;
 
 @Controller
 public class HomeController {
-	
-	/*@GetMapping(value="/vistausuario")	// De esta forma se da por hecho que es un GET
-	public String metodo(Model model) {
-		String cadenadetexto="Esto es un mensaje del controlador. Prueba segundo commit";
-		model.addAttribute("mensaje", cadenadetexto);	// Grabamos mensaje con el contenido de cadenadetexto
-		return "vista";
-	}*/
 	
 	@GetMapping(value="/datosusuario")
 	public String formulario() {
@@ -81,6 +75,22 @@ public class HomeController {
 		//dao = new DAOTest();
 		model.addAttribute("texto", dao .version());
 		return "vista";
+	}
+	
+	@GetMapping(value="/login")
+	public String login() {
+		return "login";
+	}
+	
+	@PostMapping(value="/login")
+	public String checkUser(HttpServletRequest request, Model model, HttpServletResponse response) {
+		
+		String user = request.getParameter("user");
+		String password = request.getParameter("password");
+		model.addAttribute("usulogin", user);
+		model.addAttribute("passlogin", password);
+		
+		return "tienda";
 	}
 	
 }
