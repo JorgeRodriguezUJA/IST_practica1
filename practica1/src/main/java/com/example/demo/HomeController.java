@@ -70,10 +70,9 @@ public class HomeController {
 	DAOInterface dao;
 	
 	@GetMapping(value="/version")
-	public String metodo(Model model) {
-		
+	public String versionDAO(Model model) {
 		//dao = new DAOTest();
-		model.addAttribute("texto", dao .version());
+		model.addAttribute("texto", dao.version());
 		return "vista";
 	}
 	
@@ -91,6 +90,15 @@ public class HomeController {
 		model.addAttribute("passlogin", password);
 		
 		return "tienda";
+	}
+	
+	@GetMapping(value="/leeusuarios")
+	public String leeusuarios(Model model) {
+		
+		ArrayList<Usuario> lista = new ArrayList<Usuario>();
+		lista = dao.leeUsuarios();	// Pongo dao porque es como le he llamado arriba en el Autowired
+		model.addAttribute("usuarios", lista);
+		return "usuarios";
 	}
 	
 }
