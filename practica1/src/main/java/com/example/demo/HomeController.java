@@ -68,9 +68,6 @@ public class HomeController {
 		return "usuariosesion";
 	}
 	
-	//@Autowired
-	//DAOInterface dao;
-	
 	/*@GetMapping(value="/version")
 	public String versionDAO(Model model) {
 		//dao = new DAOTest();
@@ -78,13 +75,15 @@ public class HomeController {
 		return "vista";
 	}*/
 	
+	// Sesión 2
+	
 	@GetMapping(value="/login")
 	public String login() {
 		return "login";
 	}
 	
 	@PostMapping(value="/login")
-	public String checkUser(HttpServletRequest request, Model model, HttpServletResponse response) {
+	public String buscaUsuario(HttpServletRequest request, Model model, HttpServletResponse response) {
 		
 		String user = request.getParameter("user");
 		String password = request.getParameter("password");
@@ -94,13 +93,13 @@ public class HomeController {
 		return "tienda";
 	}
 	
-	/*@GetMapping(value="/leeusuarios")
+	@GetMapping(value="/leeusuarios")
 	public String leeusuarios(Model model) {
 		
 		ArrayList<Usuario> lista = new ArrayList<Usuario>();
-		lista = dao.leeUsuarios();	// Pongo dao porque es como le he llamado arriba en el Autowired
+		//lista = dao.leeUsuarios();	// Pongo dao porque es como le he llamado arriba en el Autowired
 		model.addAttribute("usuarios", lista);
 		return "usuarios";
-	}*/
+	}
 	
 }
