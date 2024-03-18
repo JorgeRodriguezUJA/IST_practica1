@@ -68,14 +68,16 @@ public class HomeController {
 		return "usuariosesion";
 	}
 	
+	// Sesión 2
+	
+	private DAOInterface dao;
+	
 	/*@GetMapping(value="/version")
 	public String versionDAO(Model model) {
 		//dao = new DAOTest();
 		model.addAttribute("texto", dao.version());
 		return "vista";
 	}*/
-	
-	// Sesión 2
 	
 	@GetMapping(value="/login")
 	public String login() {
