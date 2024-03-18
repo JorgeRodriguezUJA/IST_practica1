@@ -30,13 +30,15 @@ public class HomeController {
 		Usuario usuario = new Usuario(user, email, nombre, password);
 		model.addAttribute("usuario", usuario);
 		
+		// Cookie de sesión
 		HttpSession session = request.getSession(true);
 		session.setAttribute("usuarioses", usuario);
 		model.addAttribute("usuarioses", usuario);
 		
+		// Cookie permanente
 		Cookie c = new Cookie("emailcookie", email);
 		c.setMaxAge(60*60*24*365*2);
-		c.setPath("/vistausuario");
+		c.setPath("/usuariosesion");
 		response.addCookie(c);
 		
 		Cookie[] cookies = request.getCookies();
@@ -66,15 +68,15 @@ public class HomeController {
 		return "usuariosesion";
 	}
 	
-	@Autowired
-	DAOInterface dao;
+	//@Autowired
+	//DAOInterface dao;
 	
-	@GetMapping(value="/version")
+	/*@GetMapping(value="/version")
 	public String versionDAO(Model model) {
 		//dao = new DAOTest();
 		model.addAttribute("texto", dao.version());
 		return "vista";
-	}
+	}*/
 	
 	@GetMapping(value="/login")
 	public String login() {
@@ -92,13 +94,13 @@ public class HomeController {
 		return "tienda";
 	}
 	
-	@GetMapping(value="/leeusuarios")
+	/*@GetMapping(value="/leeusuarios")
 	public String leeusuarios(Model model) {
 		
 		ArrayList<Usuario> lista = new ArrayList<Usuario>();
 		lista = dao.leeUsuarios();	// Pongo dao porque es como le he llamado arriba en el Autowired
 		model.addAttribute("usuarios", lista);
 		return "usuarios";
-	}
+	}*/
 	
 }
