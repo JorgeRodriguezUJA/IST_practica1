@@ -11,6 +11,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class HomeController {
@@ -70,14 +71,15 @@ public class HomeController {
 	
 	// Sesión 2
 	
-	private DAOInterface dao;
+	@Autowired
+	DAOInterface dao;
 	
-	/*@GetMapping(value="/version")
-	public String versionDAO(Model model) {
+	@GetMapping(value="/version")					// Con la ruta /version llamo al metodo version de DAOTest
+	public String versionDAO(Model model) {			// Tengo que hacer lo mismo con leeUsuarios
 		//dao = new DAOTest();
 		model.addAttribute("texto", dao.version());
 		return "vista";
-	}*/
+	}
 	
 	@GetMapping(value="/login")
 	public String login() {
@@ -92,16 +94,27 @@ public class HomeController {
 		model.addAttribute("usulogin", user);
 		model.addAttribute("passlogin", password);
 		
-		return "tienda";
+		if(dao.compruebaUsuario(user, password)) {
+			return "tienda";
+		}else {
+			return "error";
+		}
 	}
 	
-	@GetMapping(value="/leeusuarios")
-	public String leeusuarios(Model model) {
+	/*@GetMapping(value="/leeusuarios")
+	public String leeUsuarios(Model model) {
 		
-		ArrayList<Usuario> lista = new ArrayList<Usuario>();
-		//lista = dao.leeUsuarios();	// Pongo dao porque es como le he llamado arriba en el Autowired
-		model.addAttribute("usuarios", lista);
+		List<Usuario> lista = new ArrayList<Usuario>();
+		lista = dao.leeUsuarios();	// Pongo dao porque es como le he llamado arriba en el Autowired
+		//model.addAttribute("usuarios", lista);
+		for (Usuario usuario : lista) {
+		    String user = usuario.getUser();
+		    String password = usuario.getPassword();
+		    
+		    System.out.println("Usuarios: " + user + ", Password: " + password);
+		}
 		return "usuarios";
-	}
+	}*/
+		
 	
 }

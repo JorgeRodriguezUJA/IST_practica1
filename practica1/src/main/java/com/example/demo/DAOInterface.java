@@ -1,11 +1,11 @@
 package com.example.demo;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public interface DAOInterface {
 
 	public String version();
-	public ArrayList<Usuario> leeUsuarios();
-	public String autenticar(String user, String password);
+	public List<Usuario> leeUsuarios();
+	public boolean compruebaUsuario(String user, String password);
 	
 }
