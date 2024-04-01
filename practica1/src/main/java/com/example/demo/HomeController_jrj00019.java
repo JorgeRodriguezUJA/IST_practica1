@@ -16,6 +16,9 @@ import java.util.List;
 @Controller
 public class HomeController_jrj00019 {
 	
+	@Autowired
+	DAOInterface dao;
+	
 	@GetMapping(value="/datosusuario")
 	public String formulario() {
 		return "formulario_jrj00019";
@@ -30,6 +33,10 @@ public class HomeController_jrj00019 {
 		
 		Usuario usuario = new Usuario(user, email, nombre, password);
 		model.addAttribute("usuario", usuario);
+		
+		// Inserción en la base de datos
+		//dao.insertaUsuario(user, email, nombre, password);
+		dao.insertaUsuario(usuario);
 		
 		// Cookie de sesión
 		HttpSession session = request.getSession(true);
@@ -71,9 +78,6 @@ public class HomeController_jrj00019 {
 	
 	// Sesión 2
 	
-	@Autowired
-	DAOInterface dao;
-	
 	@GetMapping(value="/version")
 	public String versionDAO(Model model) {
 		model.addAttribute("texto", dao.version());
@@ -104,8 +108,6 @@ public class HomeController_jrj00019 {
 			}else {
 				if(dao.compruebaUsuario(user, password)) {
 					session = request.getSession(true);
-					//session.setAttribute("userlogin", user);
-					//String userlogin = (String)session.getAttribute("userlogin");
 					return "tienda_jrj00019";
 				}else {
 					return "error_jrj00019";

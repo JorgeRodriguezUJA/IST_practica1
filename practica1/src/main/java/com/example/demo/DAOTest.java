@@ -9,12 +9,9 @@ import org.springframework.stereotype.Service;
 
 
 
-@Repository
+//@Repository
 public class DAOTest implements DAOInterface {
 	
-	//static final String usu = "carlos";
-	//static final String pass = "carlos";
-	 
 	@Override
 	public String version() {
 		return "Estamos usando la clase DAOTest";
@@ -24,11 +21,11 @@ public class DAOTest implements DAOInterface {
 	public List<Usuario> leeUsuarios(){
 		List<Usuario> usuarios = new ArrayList<Usuario>();
 		// User, email, nombre, password
-		usuarios.add(new Usuario("admin", "admin@gmail.com", "admin", "admin"));
-		usuarios.add(new Usuario("Solracre", "carlos@gmail.com", "Carlos Perez Delgado", "porrito"));
-		usuarios.add(new Usuario("Saselandia", "fuckpiperos@gmail.com", "Francisco de Borja Cobo Hervás", "vivavox"));
-		usuarios.add(new Usuario("ValdeandeMagico", "valdeande@gmail.com", "Jose Alfonso Hernando Abejon", "vortices"));
-		usuarios.add(new Usuario("a", "a@gmail.com", "a b c", "a"));
+		usuarios.add(new Usuario(0, "admin", "admin@gmail.com", "admin", "admin"));
+		usuarios.add(new Usuario(1, "Solracre", "carlos@gmail.com", "Carlos Perez Delgado", "porrito"));
+		usuarios.add(new Usuario(2, "Saselandia", "fuckpiperos@gmail.com", "Francisco de Borja Cobo Hervás", "vivavox"));
+		usuarios.add(new Usuario(3, "ValdeandeMagico", "valdeande@gmail.com", "Jose Alfonso Hernando Abejon", "vortices"));
+		usuarios.add(new Usuario(4, "a", "a@gmail.com", "a b c", "a"));
 		
 		return usuarios;
 		
@@ -67,5 +64,7 @@ public class DAOTest implements DAOInterface {
 		}
 		
 	}
+	
+	public void insertaUsuario(Usuario usuario) {}
 
 }
