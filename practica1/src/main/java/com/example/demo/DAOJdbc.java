@@ -64,19 +64,17 @@ public class DAOJdbc implements DAOInterface{
 	
 	@Override
 	public boolean compruebaAdmin(String user, String password){
-		// El usuario administrador siempre ocupará la posición 0 del arraylist
-		if(user.equals(leeUsuarios().get(0).getUser()) && password.equals(leeUsuarios().get(0).getPassword())) {
-			return true;
-		}else {
-			return false;
-		}
+		
+		String sql = "SELECT * FROM `usuarios` WHERE user = 'admin' AND password = 'admin'";
+		
+		
 		
 	}
 	
 	@Override
 	public void insertaUsuario(Usuario usuario) {
 
-		String sql = "INSERT into usuarios (user, email, nombre, password) values (usuario.user, usuario.email, usuario.nombre, usuario.password)";
+		String sql = "INSERT into usuarios (user, email, nombre, password) values (?, ?, ?, ?)";
 		this.jdbcTemplate.update(sql, usuario.getUser(), usuario.getEmail(), usuario.getNombre(), usuario.getPassword());
 		
 	}

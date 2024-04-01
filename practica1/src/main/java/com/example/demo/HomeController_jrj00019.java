@@ -35,7 +35,6 @@ public class HomeController_jrj00019 {
 		model.addAttribute("usuario", usuario);
 		
 		// Inserción en la base de datos
-		//dao.insertaUsuario(user, email, nombre, password);
 		dao.insertaUsuario(usuario);
 		
 		// Cookie de sesión
