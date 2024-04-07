@@ -66,5 +66,10 @@ public class DAOTest implements DAOInterface {
 	}
 	
 	public void insertaUsuario(Usuario usuario) {}
+	
+	public List<Usuario> buscaUsuario(int id) {	//PRUEBA, ignorar este método
+		List<Usuario> usuarios = new ArrayList<Usuario>();
+		return usuarios;
+	}
 
 }

@@ -65,9 +65,12 @@ public class DAOJdbc implements DAOInterface{
 	@Override
 	public boolean compruebaAdmin(String user, String password){
 		
-		String sql = "SELECT * FROM `usuarios` WHERE user = 'admin' AND password = 'admin'";
-		
-		
+		// El usuario administrador siempre ocupará la posición 0 de la tabla usuarios
+		if(user.equals(leeUsuarios().get(0).getUser()) && password.equals(leeUsuarios().get(0).getPassword())) {
+			return true;
+		}else {
+			return false;
+		}
 		
 	}
 	
@@ -76,6 +79,14 @@ public class DAOJdbc implements DAOInterface{
 
 		String sql = "INSERT into usuarios (user, email, nombre, password) values (?, ?, ?, ?)";
 		this.jdbcTemplate.update(sql, usuario.getUser(), usuario.getEmail(), usuario.getNombre(), usuario.getPassword());
+		
+	}
+	
+	public List<Usuario> buscaUsuario(int id) {
+		
+		String sql = "SELECT * from usuarios WHERE id = ?";
+		List<Usuario> usuarios = this.jdbcTemplate.query(sql, mapper, id);
+		return usuarios;
 		
 	}
 	

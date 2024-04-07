@@ -19,6 +19,7 @@ public class HomeController_jrj00019 {
 	@Autowired
 	DAOInterface dao;
 	
+	//@RequestMapping(value="/", method=RequestMethod.GET)
 	@GetMapping(value="/datosusuario")
 	public String formulario() {
 		return "formulario_jrj00019";
@@ -115,6 +116,21 @@ public class HomeController_jrj00019 {
 			
 		//}
 		
+	}
+	
+	@GetMapping(value="/buscausuario")	//Busca un usuario por su id
+	public String prueba() {
+		return "buscausuario";
+	}
+	
+	@PostMapping(value="/buscausuario")
+	public String prueba(HttpServletRequest request, Model model, HttpServletResponse response) {
+		
+		String idP = request.getParameter("id");
+		int id = Integer.parseInt(idP);
+		model.addAttribute("lista", dao.buscaUsuario(id));
+		
+		return "usuarioporid";
 	}
 		
 	
