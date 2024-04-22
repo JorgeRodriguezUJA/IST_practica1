@@ -34,6 +34,13 @@
     <p>Bienvenido, <span th:text=${usulogin}></span></p>
   </div>
 </div>
+<script src="https://www.paypal.com/sdk/js?client-id=BAAIvw-atPNo_HOcxRoo3bjAqTazfLAHH1m-iwEu8R2Hz59vVtVM1YGRgk8JK4_U6xy1-5wBcn55OjVVKY&components=hosted-buttons&disable-funding=venmo&currency=EUR"></script>
+<div id="paypal-container-FHLVCGZYGFH4S"></div>
+<script>
+  paypal.HostedButtons({
+    hostedButtonId: "FHLVCGZYGFH4S",
+  }).render("#paypal-container-FHLVCGZYGFH4S")
+</script>
 
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
